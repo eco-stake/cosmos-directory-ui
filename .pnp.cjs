@@ -33,7 +33,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["parcel", "npm:2.4.1"]\
+            ["parcel", "npm:2.4.1"],\
+            ["react", "npm:18.0.0"],\
+            ["react-dom", "virtual:ce05cbb28eb2f87e70c615d5d7a197c7ad9d087df71aebd6b0ef096f7e81375dbccfe8a1da7456ab2db5d23131fbf886f21b0d7f8eb5adb76ed648409eacf00c#npm:18.0.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -1443,7 +1445,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["cosmos-directory-ui", "workspace:."],\
-            ["parcel", "npm:2.4.1"]\
+            ["parcel", "npm:2.4.1"],\
+            ["react", "npm:18.0.0"],\
+            ["react-dom", "virtual:ce05cbb28eb2f87e70c615d5d7a197c7ad9d087df71aebd6b0ef096f7e81375dbccfe8a1da7456ab2db5d23131fbf886f21b0d7f8eb5adb76ed648409eacf00c#npm:18.0.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -2087,6 +2091,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["loose-envify", [\
+        ["npm:1.4.0", {\
+          "packageLocation": "./.yarn/cache/loose-envify-npm-1.4.0-6307b72ccf-6517e24e0c.zip/node_modules/loose-envify/",\
+          "packageDependencies": [\
+            ["loose-envify", "npm:1.4.0"],\
+            ["js-tokens", "npm:4.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["lru-cache", [\
         ["npm:6.0.0", {\
           "packageLocation": "./.yarn/cache/lru-cache-npm-6.0.0-b4c8668fe1-f97f499f89.zip/node_modules/lru-cache/",\
@@ -2560,6 +2574,40 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["react", [\
+        ["npm:18.0.0", {\
+          "packageLocation": "./.yarn/cache/react-npm-18.0.0-fdbcb4c477-293020b965.zip/node_modules/react/",\
+          "packageDependencies": [\
+            ["react", "npm:18.0.0"],\
+            ["loose-envify", "npm:1.4.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-dom", [\
+        ["npm:18.0.0", {\
+          "packageLocation": "./.yarn/cache/react-dom-npm-18.0.0-d6a12fba32-dd0ba9f2f3.zip/node_modules/react-dom/",\
+          "packageDependencies": [\
+            ["react-dom", "npm:18.0.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:ce05cbb28eb2f87e70c615d5d7a197c7ad9d087df71aebd6b0ef096f7e81375dbccfe8a1da7456ab2db5d23131fbf886f21b0d7f8eb5adb76ed648409eacf00c#npm:18.0.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-dom-virtual-2a66f6707b/0/cache/react-dom-npm-18.0.0-d6a12fba32-dd0ba9f2f3.zip/node_modules/react-dom/",\
+          "packageDependencies": [\
+            ["react-dom", "virtual:ce05cbb28eb2f87e70c615d5d7a197c7ad9d087df71aebd6b0ef096f7e81375dbccfe8a1da7456ab2db5d23131fbf886f21b0d7f8eb5adb76ed648409eacf00c#npm:18.0.0"],\
+            ["@types/react", null],\
+            ["loose-envify", "npm:1.4.0"],\
+            ["react", "npm:18.0.0"],\
+            ["scheduler", "npm:0.21.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["react-refresh", [\
         ["npm:0.9.0", {\
           "packageLocation": "./.yarn/cache/react-refresh-npm-0.9.0-02c61ee045-6440146176.zip/node_modules/react-refresh/",\
@@ -2632,6 +2680,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/safer-buffer-npm-2.1.2-8d5c0b705e-cab8f25ae6.zip/node_modules/safer-buffer/",\
           "packageDependencies": [\
             ["safer-buffer", "npm:2.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["scheduler", [\
+        ["npm:0.21.0", {\
+          "packageLocation": "./.yarn/cache/scheduler-npm-0.21.0-9a906f4833-4f82850760.zip/node_modules/scheduler/",\
+          "packageDependencies": [\
+            ["scheduler", "npm:0.21.0"],\
+            ["loose-envify", "npm:1.4.0"]\
           ],\
           "linkType": "HARD"\
         }]\
