@@ -9,12 +9,12 @@ function CosmosDirectory(){
   const validatorsUrl = `${directoryProtocol}://validators.${directoryDomain}`
   const statusUrl = `${directoryProtocol}://status.${directoryDomain}`
 
-  function rpcUrl(name){
-    return rpcBase + '/' + name
+  function rpcUrl(path){
+    return rpcBase + '/' + path
   }
 
-  function restUrl(name){
-    return restBase + '/' + name
+  function restUrl(path){
+    return restBase + '/' + path
   }
 
   function getStatus(){
@@ -27,18 +27,18 @@ function CosmosDirectory(){
       .then(res => res.data)
   }
 
-  function getChainStatus(name){
-    return axios.get(statusUrl + '/' + name)
+  function getChainStatus(path){
+    return axios.get(statusUrl + '/' + path)
       .then(res => res.data)
   }
 
-  function getChainData(name) {
-    return axios.get([chainsUrl, name, 'chain'].join('/'))
-      .then(res => res.data)
+  function getChainData(path) {
+    return axios.get([chainsUrl, path, 'chain'].join('/'))
+      .then(res => { return {...res.data, path} })
   }
 
-  async function getAssetData(name) {
-    return axios.get([chainsUrl, name, 'assetlist'].join('/'))
+  async function getChainAssetlist(path) {
+    return axios.get([chainsUrl, path, 'assetlist'].join('/'))
       .then(res => res.data)
   }
 
@@ -55,7 +55,7 @@ function CosmosDirectory(){
     getChains,
     getChainStatus,
     getChainData,
-    getAssetData,
+    getChainAssetlist,
     getValidators
   }
 }

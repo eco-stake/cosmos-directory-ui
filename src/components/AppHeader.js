@@ -15,12 +15,21 @@ import CIcon from '@coreui/icons-react'
 import { cilListRich, cilMenu } from '@coreui/icons'
 import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
+import _ from 'lodash'
 
 const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { chain } = props
+  const { chain, chainRepository, activeKey, setActiveKey } = props
+
+  function lastUpdate(){
+    if(!chainRepository) return
+
+    const date = new Date(chainRepository.timestamp * 1000)
+    const { url, commit } = chainRepository
+    return <a href={`${url}/commit/${commit}`} target="_blank"><Moment fromNow>{date}</Moment></a>
+  }
 
   return (
     <CHeader position="sticky" className="mb-4 pb-0">
@@ -46,26 +55,21 @@ const AppHeader = (props) => {
         </CHeaderNav>
       </CContainer>
       <CHeaderDivider />
-      <CContainer className="pt-2">
+      <CContainer fluid className="pt-2">
         {chain && (
           <CNav variant="tabs">
-            <CNavItem>
-              <CNavLink href="#" active>
-                Overview
-              </CNavLink>
-            </CNavItem>
-            <CNavItem>
-              <CNavLink href="#">Chain</CNavLink>
-            </CNavItem>
-            <CNavItem>
-              <CNavLink href="#">Validators</CNavLink>
-            </CNavItem>
-            <CNavItem>
-              <CNavLink href="#">APIs</CNavLink>
-            </CNavItem>
+            {['overview', 'chain', 'validators', 'nodes'].map(key => {
+              return (
+                <CNavItem key={key}>
+                  <CNavLink role="button" active={activeKey === key} onClick={() => setActiveKey(key)}>
+                    {_.startCase(key)}
+                  </CNavLink>
+                </CNavItem>
+              )
+            })}
           </CNav>
         )}
-        <p className="ms-auto small"><em>Last update: <Moment fromNow>{props.lastUpdate}</Moment></em></p>
+        <p className="ms-auto small"><em>Chains updated: {lastUpdate()}</em></p>
       </CContainer>
     </CHeader>
   )

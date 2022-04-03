@@ -18,6 +18,7 @@ export function App() {
   const [chains, setChains] = useState()
   const [chain, setChain] = useState()
   const [status, setStatus] = useState()
+  const [activeKey, setActiveKey] = useState()
   const params = useParams()
 
   const directory = CosmosDirectory()
@@ -47,6 +48,7 @@ export function App() {
       let chain
       if (params.chain) chain = chainsByPath()[params.chain]
       setChain(chain)
+      setActiveKey('overview')
     }
   })
 
@@ -54,12 +56,6 @@ export function App() {
     if(!chains) return {}
 
     return chains.chains.reduce((a, v) => ({ ...a, [v.path]: v }), {})
-  }
-
-  function lastUpdate(){
-    if(!chains) return
-
-    return new Date(chains.repository.timestamp * 1000)
   }
 
   if(!chains || !status){
@@ -74,11 +70,11 @@ export function App() {
     <div>
       <AppSidebar chains={chainsByPath()} chain={chain} />
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
-        <AppHeader chain={chain} lastUpdate={lastUpdate()} />
+        <AppHeader chain={chain} chainRepository={chains.repository} activeKey={activeKey} setActiveKey={setActiveKey} />
         <div className="body flex-grow-1 px-3">
           {chain
             ? (
-              <Chain chainName={chain.name} directory={directory} />
+              <Chain chainPath={chain.path} directory={directory} activeKey={activeKey} />
             ) : (
               <ChainList chains={chainsByPath()} status={status} />
             )}

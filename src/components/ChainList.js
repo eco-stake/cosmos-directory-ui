@@ -8,6 +8,7 @@ import {
   CCardTitle, 
 } from '@coreui/react'
 import { Link } from 'react-router-dom'
+import _ from 'lodash'
 
 import DataTable from './DataTable'
 
@@ -25,7 +26,7 @@ function ChainList(props) {
       },
       {
         key: 'Status',
-        value: chain.status
+        value: chain.status === 'live' ? <span className="text-success p-0">Live</span> : <span className="text-danger p-0">{_.startCase(chain.status)}</span>
       },
       {
         key: 'APIs',

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 
 import { AppSidebarNav } from './AppSidebarNav'
 
@@ -18,22 +18,23 @@ import logo3x from '../assets/logo@3x.png'
 
 const AppSidebar = (props) => {
   const dispatch = useDispatch()
-  const unfoldable = useSelector((state) => state.sidebarUnfoldable)
+  const narrow = useSelector((state) => state.sidebarNarrow)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   return (
     <CSidebar
       position="fixed"
-      unfoldable={unfoldable}
+      unfoldable={false}
+      narrow={narrow}
       visible={sidebarShow}
       onVisibleChange={(visible) => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <a href="/" className="text-reset sidebar-brand-full">
+        <Link to="/" className="text-reset sidebar-brand-full">
           <img src={logo} srcSet={`${logo2x} 2x, ${logo3x} 3x`} alt="cosmos.directory" className="img-fluid px-3" />
-        </a>
+        </Link>
         <a href="/" className="text-reset text-decoration-none sidebar-brand-narrow">⚛️ · 📖</a>
       </CSidebarBrand>
       <CSidebarNav>
@@ -43,7 +44,7 @@ const AppSidebar = (props) => {
       </CSidebarNav>
       <CSidebarToggler
         className="d-none d-lg-flex"
-        onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
+        onClick={() => dispatch({ type: 'set', sidebarNarrow: !narrow })}
       />
     </CSidebar>
   )
