@@ -1,6 +1,6 @@
 import 'core-js'
 import React, { Suspense } from 'react'
-import { HashRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ReactDOM from "react-dom/client";
 import { App } from "./App";
 import { Provider } from 'react-redux'
@@ -16,12 +16,13 @@ const container = document.getElementById('app');
 const root = ReactDOM.createRoot(container);
 root.render(
   <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter>
       <Suspense fallback={loading}>
         <Routes>
           <Route path="*" name="Home" element={<App />} />
+          <Route path="/:chain" element={<App />} />
         </Routes>
       </Suspense>
-    </HashRouter>
+    </BrowserRouter>
   </Provider>
 );
