@@ -1,7 +1,7 @@
 import 'core-js'
 import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import ReactDOM from "react-dom/client";
+import * as ReactDOM from 'react-dom';
 import { App } from "./App";
 import { Provider } from 'react-redux'
 import store from './store'
@@ -13,8 +13,7 @@ const loading = (
 )
 
 const container = document.getElementById('app');
-const root = ReactDOM.createRoot(container);
-root.render(
+ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Suspense fallback={loading}>
@@ -24,5 +23,6 @@ root.render(
         </Routes>
       </Suspense>
     </BrowserRouter>
-  </Provider>
+  </Provider>,
+  container
 );
