@@ -7,3 +7,7 @@
   will-change: auto;
   @include transition(padding .15s);
 }
+
+.ReactModal__Overlay{
+  z-index:9999;
+}

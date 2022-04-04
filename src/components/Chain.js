@@ -33,24 +33,31 @@ function Chain(props) {
   
   useEffect(() => {
     if(chain && chainPath != chain.path){
+      setRefreshInterval(clearInterval(refreshInterval))
       setChain(undefined)
       setAssetlist(undefined)
       setStatus(undefined)
     }
-  })
+  }, [chain, chainPath])
 
   useEffect(() => {
     if(!chain){
-      clearInterval(refreshInterval)
       getChainData();
-    }else if(!refreshInterval){
+    }
+  }, [chain]);
+
+  useEffect(() => {
+    if(chain && !refreshInterval){
       setRefreshInterval(setInterval(() => {
         getChainData()
         getChainAssetlist()
         getChainStatus()
       }, 5000))
     }
-  }, [chain]);
+    return () => {
+      clearInterval(refreshInterval)
+    };
+  }, [chain, refreshInterval])
 
   useEffect(() => {
     if(!assetlist){

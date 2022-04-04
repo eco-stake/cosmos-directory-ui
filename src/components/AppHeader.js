@@ -12,7 +12,7 @@ import {
   CNavItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilListRich, cilMenu } from '@coreui/icons'
+import { cilApps, cilMenu } from '@coreui/icons'
 import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
 import _ from 'lodash'
@@ -41,13 +41,19 @@ const AppHeader = (props) => {
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
         <CHeaderBrand component='span' className="me-auto">
-          <Link to="/" className="text-reset text-decoration-none">cosmos.directory</Link>
-          {props.chain && <Link to={'/' + props.chain.path} className="text-secondary text-decoration-none"> / {props.chain.path}</Link>}
+          {props.chain ? (
+            <>
+              <Link to="/" className="text-reset text-decoration-none">cosmos.directory</Link>
+              <Link to={'/' + props.chain.path} onClick={() => props.setShowCommands(true)} className="text-secondary text-decoration-none"> / {props.chain.path}</Link>
+            </>
+          ) : (
+            <Link to="/" onClick={() => props.setShowCommands(true)} className="text-reset text-decoration-none">cosmos.directory</Link>
+          )}
         </CHeaderBrand>
         <CHeaderNav>
           <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilListRich} size="lg" />
+            <CNavLink role="button" onClick={() => props.setShowCommands(true)}>
+              <CIcon icon={cilApps} size="lg" />
             </CNavLink>
           </CNavItem>
         </CHeaderNav>

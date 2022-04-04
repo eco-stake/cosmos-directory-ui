@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
+import CommandPalette from 'react-command-palette';
 
 import CosmosDirectory from "./CosmosDirectory";
 
@@ -19,7 +21,9 @@ export function App() {
   const [chain, setChain] = useState()
   const [status, setStatus] = useState()
   const [activeKey, setActiveKey] = useState()
+  const [showCommands, setShowCommands] = useState(false)
   const params = useParams()
+  const navigate = useNavigate()
 
   const directory = CosmosDirectory()
 
@@ -58,6 +62,17 @@ export function App() {
     return chains.chains.reduce((a, v) => ({ ...a, [v.path]: v }), {})
   }
 
+  function commands(){
+    if(!chains) return []
+
+    return chains.chains.map(chain => {
+      return {
+        name: chain.pretty_name,
+        command() { navigate('/' + chain.path) }
+      }
+    })
+  }
+
   if(!chains || !status){
     return (
       <div className="pt-3 text-center">
@@ -70,7 +85,8 @@ export function App() {
     <div>
       <AppSidebar chains={chainsByPath()} chain={chain} />
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
-        <AppHeader chain={chain} chainRepository={chains.repository} activeKey={activeKey} setActiveKey={setActiveKey} />
+        <AppHeader chain={chain} chainRepository={chains.repository}
+          activeKey={activeKey} setActiveKey={setActiveKey} setShowCommands={setShowCommands} />
         <div className="body flex-grow-1 px-3">
           {chain
             ? (
@@ -80,6 +96,8 @@ export function App() {
             )}
         </div>
         <AppFooter />
+        <CommandPalette open={showCommands} commands={commands()} closeOnSelect={true}
+          resetInputOnOpen={true} placeholder="Start typing a network" onRequestClose={() => { setShowCommands(false) }} />
       </div>
     </div>
   ); 
