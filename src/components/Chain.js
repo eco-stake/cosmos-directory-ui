@@ -32,6 +32,12 @@ function Chain(props) {
   }
   
   useEffect(() => {
+    return () => {
+      clearInterval(refreshInterval)
+    }
+  }, [refreshInterval])
+  
+  useEffect(() => {
     if(chain && chainPath != chain.path){
       setRefreshInterval(clearInterval(refreshInterval))
       setChain(undefined)
@@ -54,9 +60,6 @@ function Chain(props) {
         getChainStatus()
       }, 5000))
     }
-    return () => {
-      clearInterval(refreshInterval)
-    };
   }, [chain, refreshInterval])
 
   useEffect(() => {
