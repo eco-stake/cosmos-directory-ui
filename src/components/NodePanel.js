@@ -91,7 +91,7 @@ function NodePanel(props) {
             return (
               <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === type} key={type}>
                 {['rpc', 'rest'].includes(type) &&
-                  <p className="alert alert-secondary">
+                  <p className="alert alert-secondary small">
                     <strong>{type.toUpperCase()} Proxy:</strong> <a href={`https://${type}.cosmos.directory/${props.chain.path}`} target="_blank">{`https://${type}.cosmos.directory/${props.chain.path}`}</a>
                   </p>
                 }

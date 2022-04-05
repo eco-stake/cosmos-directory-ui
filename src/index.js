@@ -12,7 +12,7 @@ const loading = (
   </div>
 )
 
-const container = document.getElementById('app');
+const container = document.getElementById('root');
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
