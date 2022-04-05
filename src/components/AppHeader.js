@@ -24,7 +24,7 @@ const AppHeader = (props) => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
   const navigate = useNavigate()
 
-  const { chains, chain, chainRepository, activeKey, setActiveKey } = props
+  const { chains, chain, chainRepository, activeSection, setSection } = props
 
   function lastUpdate(){
     if(!chainRepository) return
@@ -40,7 +40,7 @@ const AppHeader = (props) => {
     return chains.chains.map(chain => {
       return {
         name: chain.pretty_name,
-        command() { navigate('/' + chain.path) }
+        command() { navigate('/' + chain.path + (activeSection && activeSection !== 'overview' ? `/${activeSection}` : '')) }
       }
     })
   }
@@ -82,7 +82,7 @@ const AppHeader = (props) => {
             {['overview', 'chain', 'validators', 'nodes'].map(key => {
               return (
                 <CNavItem key={key}>
-                  <CNavLink role="button" active={activeKey === key} onClick={() => setActiveKey(key)}>
+                  <CNavLink role="button" active={activeSection === key} onClick={() => setSection(key)}>
                     {_.startCase(key)}
                   </CNavLink>
                 </CNavItem>

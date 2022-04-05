@@ -25,11 +25,17 @@ function OverviewPanel(props) {
       {
         key: 'Chain ID',
         value: chain.chain_id
-      },
-      {
-        key: 'Token',
-        value: baseAsset()?.symbol
-      },
+      }
+    ]
+    if (chain.codebase?.recommended_version) data.push({
+      key: 'Version',
+      value: chain.codebase.recommended_version
+    })
+    if (baseAsset()?.symbol) data.push({
+      key: 'Token',
+      value: baseAsset()?.symbol
+    })
+    data.push(...[
       {
         key: 'Status',
         value: chain.status === 'live' ? <span className="text-success p-0">Live</span> : <span className="text-danger p-0">{_.startCase(chain.status)}</span>
@@ -38,7 +44,7 @@ function OverviewPanel(props) {
         key: 'APIs',
         value: status.available ? <span className="text-success p-0">Available</span> : <span className="text-danger p-0">Unavailable</span>
       },
-    ]
+    ])
     if(chain.explorers){
       data.push({
         key: 'Explorers',

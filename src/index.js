@@ -20,6 +20,7 @@ ReactDOM.render(
         <Routes>
           <Route path="*" name="Home" element={<App />} />
           <Route path="/:chain" element={<App />} />
+          <Route path="/:chain/:section" element={<App />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { 
   CContainer, 
   CSpinner,
-  CTabPane
+  CTabPane,
+  CTabContent
 } from '@coreui/react'
 import ChainOverview from "./ChainOverview";
+import ChainDetails from "./ChainDetails";
+import ChainNodes from "./ChainNodes";
 
 function Chain(props) {
-  const { chainPath, directory, activeKey } = props
+  const { chainPath, directory, activeSection } = props
   const [chain, setChain] = useState()
   const [assetlist, setAssetlist] = useState()
   const [status, setStatus] = useState()
@@ -84,11 +87,17 @@ function Chain(props) {
 
   return (
     <CContainer lg>
-      <>
-        <CTabPane role="tabpanel" aria-labelledby="chain-tab" visible={activeKey === 'overview'} key={'overview'}>
+      <CTabContent>
+        <CTabPane role="tabpanel" aria-labelledby="overview-tab" visible={activeSection === 'overview'} key={'overview'}>
           <ChainOverview chain={chain} assetlist={assetlist} status={status} />
         </CTabPane>
-      </>
+        <CTabPane role="tabpanel" aria-labelledby="chain-tab" visible={activeSection === 'chain'} key={'chain'}>
+          <ChainDetails chain={chain} assetlist={assetlist} status={status} />
+        </CTabPane>
+        <CTabPane role="tabpanel" aria-labelledby="nodes-tab" visible={activeSection === 'nodes'} key={'nodes'}>
+          <ChainNodes chain={chain} status={status} />
+        </CTabPane>
+      </CTabContent>
     </CContainer>
   )
 }

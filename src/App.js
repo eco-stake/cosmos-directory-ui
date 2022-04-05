@@ -15,14 +15,22 @@ import Chain from "./components/Chain";
 import { CSpinner } from '@coreui/react'
 
 export function App() {
+  const params = useParams()
+  const navigate = useNavigate()
   const [chains, setChains] = useState()
   const [chain, setChain] = useState()
   const [status, setStatus] = useState()
-  const [activeKey, setActiveKey] = useState()
+  const [activeSection, setActiveSection] = useState(params.section)
   const [showCommands, setShowCommands] = useState(false)
-  const params = useParams()
 
   const directory = CosmosDirectory()
+
+  const SECTIONS = [
+    'overview',
+    'chain',
+    'validators',
+    'nodes'
+  ]
 
   useEffect(() => {
     if(!chains){
@@ -49,9 +57,30 @@ export function App() {
       let chain
       if (params.chain) chain = chainsByPath()[params.chain]
       setChain(chain)
-      setActiveKey('overview')
     }
   })
+
+  useEffect(() => {
+    if(chain){
+      if (!activeSection || !SECTIONS.includes(activeSection)){
+        setSection('overview')
+      }
+      if(activeSection !== 'overview' && params.section !== activeSection){
+        setActiveSection('overview')
+      }
+    }
+  })
+
+  function setSection(section){
+    if(section !== activeSection){
+      setActiveSection(section)
+      if(section !== 'overview'){
+        navigate(`/${chain.path}/${section}`)
+      }else{
+        navigate(`/${chain.path}`)
+      }
+    }
+  }
 
   function chainsByPath(){
     if(!chains) return {}
@@ -72,12 +101,12 @@ export function App() {
       <AppSidebar chains={chainsByPath()} chain={chain} />
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
         <AppHeader chains={chains} chain={chain} chainRepository={chains.repository}
-          activeKey={activeKey} setActiveKey={setActiveKey} 
+          activeSection={activeSection} setSection={setSection} 
           showCommands={showCommands} setShowCommands={setShowCommands} />
         <div className="body flex-grow-1 px-3">
           {chain
             ? (
-              <Chain chainPath={chain.path} directory={directory} activeKey={activeKey} />
+              <Chain chainPath={chain.path} directory={directory} activeSection={activeSection} />
             ) : (
               <ChainList chains={chainsByPath()} status={status} />
             )}
