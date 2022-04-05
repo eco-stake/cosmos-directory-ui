@@ -15,7 +15,7 @@ function ChainOverview(props) {
     <CRow md={{ cols: 1, gutter: 4 }} lg={{ cols: 2 }}>
       <OverviewPanel chain={chain} assetlist={assetlist} status={status} />
       <SourcesPanel chain={chain} />
-      <NodePanel title="Nodes" apis={chain.apis} peers={chain.peers} status={status} />
+      <NodePanel title="Nodes" chain={chain} apis={chain.apis} peers={chain.peers} status={status} />
       <ConfigurationPanel chain={chain} />
       <AssetsPanel chain={chain} assetlist={assetlist} />
     </CRow>

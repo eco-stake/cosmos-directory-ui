@@ -90,6 +90,11 @@ function NodePanel(props) {
           {apiTypes.map(type => {
             return (
               <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === type} key={type}>
+                {['rpc', 'rest'].includes(type) &&
+                  <p className="alert alert-secondary">
+                    <strong>{type.toUpperCase()} Proxy:</strong> <a href={`https://${type}.cosmos.directory/${props.chain.path}`} target="_blank">{`https://${type}.cosmos.directory/${props.chain.path}`}</a>
+                  </p>
+                }
                 <DataTable bodyClass="small" columnclass="align-middle" data={data[type]} header={['Provider/Address', 'Check']} />
               </CTabPane>
             )
