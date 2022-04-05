@@ -13,15 +13,18 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilApps, cilMenu } from '@coreui/icons'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Moment from 'react-moment'
 import _ from 'lodash'
+
+import CommandPalette from 'react-command-palette';
 
 const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
+  const navigate = useNavigate()
 
-  const { chain, chainRepository, activeKey, setActiveKey } = props
+  const { chains, chain, chainRepository, activeKey, setActiveKey } = props
 
   function lastUpdate(){
     if(!chainRepository) return
@@ -30,6 +33,18 @@ const AppHeader = (props) => {
     const { url, commit } = chainRepository
     return <a href={`${url}/commit/${commit}`} target="_blank"><Moment fromNow>{date}</Moment></a>
   }
+
+  function commands(){
+    if(!chains) return []
+
+    return chains.chains.map(chain => {
+      return {
+        name: chain.pretty_name,
+        command() { navigate('/' + chain.path) }
+      }
+    })
+  }
+
 
   return (
     <CHeader position="sticky" className="mb-4 pb-0">
@@ -52,9 +67,9 @@ const AppHeader = (props) => {
         </CHeaderBrand>
         <CHeaderNav>
           <CNavItem>
-            <CNavLink role="button" onClick={() => props.setShowCommands(true)}>
-              <CIcon icon={cilApps} size="lg" />
-            </CNavLink>
+            <CommandPalette open={props.showCommands} commands={commands()} closeOnSelect={true}
+              resetInputOnOpen={true} placeholder="Start typing a network" trigger={<CNavLink><CIcon icon={cilApps} size="lg" /></CNavLink>}
+              onRequestClose={() => { props.setShowCommands(false) }} />
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-3">
