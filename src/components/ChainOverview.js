@@ -5,15 +5,17 @@ import {
 import OverviewPanel from "./OverviewPanel";
 import SourcesPanel from "./SourcesPanel";
 import NodePanel from "./NodePanel";
+import ValidatorsPanel from "./ValidatorsPanel";
 
 function ChainOverview(props) {
-  const { chain, assetlist, status } = props
+  const { chain, assetlist, validators, status } = props
 
   return (
     <CRow md={{ cols: 1, gutter: 4 }} lg={{ cols: 2 }}>
       <OverviewPanel chain={chain} assetlist={assetlist} status={status} />
       <SourcesPanel chain={chain} />
-      <NodePanel title="Nodes" chain={chain} apis={chain.apis} peers={chain.peers} status={status} />
+      <ValidatorsPanel chain={chain} validators={validators} limit={10} />
+      <NodePanel chain={chain} apis={chain.apis} peers={chain.peers} status={status} limit={3} />
     </CRow>
   )
 }

@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { 
   CRow, 
   CCol, 
@@ -67,6 +68,9 @@ function OverviewPanel(props) {
             <CCardBody>
               <CCardTitle className="mb-3">{chain.pretty_name}</CCardTitle>
               <DataTable bodyClass="small" data={data} />
+              <div className="text-end">
+                <Link to={`/${chain.path}/chain`} className="btn btn-light">See more</Link>
+              </div>
             </CCardBody>
           </CCol>
         </CRow>

@@ -63,7 +63,10 @@ export function App() {
   useEffect(() => {
     if(chain){
       if (!activeSection || !SECTIONS.includes(activeSection)){
-        setSection('overview')
+        return setSection('overview')
+      }
+      if (params.section && params.section !== activeSection){
+        return setActiveSection(params.section)
       }
       if(activeSection !== 'overview' && params.section !== activeSection){
         setActiveSection('overview')

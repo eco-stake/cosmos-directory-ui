@@ -7,12 +7,14 @@ import {
   CTabPane,
   CTable
 } from '@coreui/react'
+import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
 import Panel from "./Panel"
 import DataTable from './DataTable'
 import _ from 'lodash'
 
 function NodePanel(props) {
+  const { status, chain } = props
   if(!props.apis && !props.peers) return null
 
   const apiTypes = Object.keys(props.apis || {})
@@ -24,7 +26,7 @@ function NodePanel(props) {
     const apis = props.apis[type]
     if (!apis || !apis.length) return sum
     sum[type] = apis.map(api => {
-      const apiStatus = props.status[type]?.current[api.address]
+      const apiStatus = status[type]?.current[api.address]
       const addressLink = <a href={api.address} target="_blank">{api.address}</a>
       return {
         key: api.address,
@@ -73,7 +75,7 @@ function NodePanel(props) {
   }, data)
 
   return (
-    <Panel title={`${props.title || 'APIs'}`}>
+    <Panel title={`${props.title || 'Nodes'}`}>
       <>
         <CNav variant="tabs" role="tablist">
           {types.map(type => {
@@ -92,10 +94,10 @@ function NodePanel(props) {
               <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === type} key={type}>
                 {['rpc', 'rest'].includes(type) &&
                   <p className="alert alert-secondary small mt-2">
-                    <strong>{type.toUpperCase()} Proxy:</strong> <a href={`https://${type}.cosmos.directory/${props.chain.path}`} target="_blank">{`https://${type}.cosmos.directory/${props.chain.path}`}</a>
+                    <strong>{type.toUpperCase()} Proxy:</strong> <a href={`https://${type}.cosmos.directory/${chain.path}`} target="_blank">{`https://${type}.cosmos.directory/${chain.path}`}</a>
                   </p>
                 }
-                <DataTable bodyClass="small" columnclass="align-middle" data={data[type]} header={['Provider/Address', 'Check']} />
+                <DataTable bodyClass="small" columnclass="align-middle" data={props.limit ? _.take(data[type], props.limit) : data[type]} header={['Provider/Address', 'Check']} />
               </CTabPane>
             )
           })}
@@ -107,6 +109,11 @@ function NodePanel(props) {
             )
           })}
         </CTabContent>
+        {props.limit && (
+        <div className="text-end">
+          <Link to={`/${chain.path}/nodes`} className="btn btn-light">See more</Link>
+        </div>
+        )}
       </>
     </Panel>
   )
