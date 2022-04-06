@@ -126,4 +126,4 @@ function Chain(props) {
   )
 }
 
-export default React.memo(Chain)
+export default Chain

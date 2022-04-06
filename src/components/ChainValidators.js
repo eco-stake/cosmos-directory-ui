@@ -14,4 +14,4 @@ function ChainValidators(props) {
   )
 }
 
-export default React.memo(ChainValidators)
+export default ChainValidators

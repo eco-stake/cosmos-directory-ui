@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useParams, useNavigate } from "react-router-dom";
+
+import { CSpinner } from '@coreui/react'
 
 import CosmosDirectory from "./CosmosDirectory";
 
 import AppSidebar from "./components/AppSidebar";
 import AppHeader from "./components/AppHeader";
 import ChainList from "./components/ChainList";
+import Chain from "./components/Chain";
 import AppFooter from "./components/AppFooter";
 
+
 import './scss/style.scss'
-import Chain from "./components/Chain";
 
-import { CSpinner } from '@coreui/react'
-
-export function App() {
+function App() {
   const params = useParams()
   const navigate = useNavigate()
   const [chains, setChains] = useState()
@@ -119,3 +120,5 @@ export function App() {
     </div>
   ); 
 } 
+
+export default App

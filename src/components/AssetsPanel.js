@@ -9,7 +9,6 @@ import {
   CCol,
   CTable
 } from '@coreui/react'
-import Moment from 'react-moment'
 import Panel from "./Panel"
 import DataTable from './DataTable'
 import _ from 'lodash'

@@ -20,4 +20,4 @@ function ChainOverview(props) {
   )
 }
 
-export default React.memo(ChainOverview)
+export default ChainOverview

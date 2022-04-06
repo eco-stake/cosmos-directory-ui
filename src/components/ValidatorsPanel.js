@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import _ from 'lodash'
 import Panel from "./Panel"
-import { ValidatorBadges } from "./ValidatorBadges";
+import ValidatorBadges from "./ValidatorBadges";
 
 function ValidatorsPanel(props) {
   const { chain, validators } = props
@@ -112,9 +112,7 @@ function ValidatorsPanel(props) {
                             )}
                           </td>
                           <td className="align-middle" width={180}>
-                            <div className="text-start">
-                              <ValidatorBadges validator={validator} chain={chain} />
-                            </div>
+                            <ValidatorBadges validator={validator} chain={chain} />
                           </td>
                           {!props.limit &&
                             <td className="align-middle text-center">

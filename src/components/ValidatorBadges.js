@@ -1,3 +1,4 @@
+import React from "react";
 import { 
   CTooltip
 } from '@coreui/react'
@@ -11,8 +12,10 @@ import {
   cilGrain
 } from '@coreui/icons'
 
-export function ValidatorBadges(props) {
+function ValidatorBadges(props) {
   const { validator, chain } = props
+
+  if(!validator || !chain) return null
 
   function website() {
     let url = validator.description && validator.description.website
@@ -47,12 +50,14 @@ export function ValidatorBadges(props) {
   }
 
   return (
-    <>
+    <div className="text-start">
       {renderBadge(cilHeart, "Validator commission is greater than 0", commissionPercent() > 0.0)}
       {renderBadge(cilGrain, "Validator is not in the top 10", validator.rank > 10)}
       {renderBadge(cilScreenDesktop, "Validator has a website", website(), website())}
       {renderBadge(cilLifeRing, "Validator has a security contact", validator.description?.security_contact, `mailto:${validator.description?.security_contact}`)}
       {renderBadge(cilLoopCircular, "Validator offers REStake", validator.restake?.address, `https://restake.app/${chain.path}`)}
-    </>
+    </div>
   )
 }
+
+export default ValidatorBadges

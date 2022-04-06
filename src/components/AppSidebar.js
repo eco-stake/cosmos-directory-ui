@@ -50,4 +50,4 @@ const AppSidebar = (props) => {
   )
 }
 
-export default React.memo(AppSidebar)
+export default AppSidebar

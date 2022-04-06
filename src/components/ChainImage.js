@@ -1,3 +1,5 @@
+import React from 'react'
+
 function ChainImage(props) {
   let { chain, assetlist, width, height } = props
   height = height || 30

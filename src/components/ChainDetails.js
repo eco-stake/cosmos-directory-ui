@@ -16,4 +16,4 @@ function ChainDetails(props) {
   )
 }
 
-export default React.memo(ChainDetails)
+export default ChainDetails

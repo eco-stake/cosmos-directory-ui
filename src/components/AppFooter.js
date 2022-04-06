@@ -21,4 +21,4 @@ const AppFooter = () => {
   )
 }
 
-export default React.memo(AppFooter)
+export default AppFooter

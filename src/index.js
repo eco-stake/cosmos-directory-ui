@@ -1,10 +1,11 @@
+import 'react-app-polyfill/stable'
 import 'core-js'
 import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import * as ReactDOM from 'react-dom';
-import { App } from "./App";
 import { Provider } from 'react-redux'
 import store from './store'
+import App from "./App";
 
 const loading = (
   <div className="pt-3 text-center">
