@@ -26,8 +26,8 @@ function NodePanel(props) {
     const apis = props.apis[type]
     if (!apis || !apis.length) return sum
     apis.sort((a, b) => {
-      const aStatus = status[type]?.current[a.address]
-      const bStatus = status[type]?.current[b.address]
+      const aStatus = status[type]?.current[a.address] || {}
+      const bStatus = status[type]?.current[b.address] || {}
       if (aStatus.available === bStatus.available){
         return parseInt(aStatus.responseTime) - parseInt(bStatus.responseTime)
         // return a.address > b.address ? 1 : -1
@@ -39,7 +39,7 @@ function NodePanel(props) {
       const apiStatus = status[type]?.current[api.address]
       const addressLink = <a href={api.address} target="_blank">{api.address}</a>
       return {
-        key: api.address,
+        key: type + api.address,
         label: api.provider ? <span>{api.provider}<br />{addressLink}</span> : addressLink,
         value: !apiStatus ? (
           <span>Status: <em>Unknown</em></span>
