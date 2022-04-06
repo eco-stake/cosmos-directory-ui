@@ -22,6 +22,10 @@ export function ValidatorBadges(props) {
     return url.startsWith('http') ? url : ('https://' + url)
   }
 
+  function commissionPercent() {
+    return validator.commission && validator.commission.commission_rates.rate
+  }
+
   function renderBadge(icon, tooltip, check, link) {
     const classNames = ['mx-1']
     if (!check) {
@@ -44,10 +48,10 @@ export function ValidatorBadges(props) {
 
   return (
     <>
-      {renderBadge(cilHeart, "Validator commission is greater than 0", validator.commission.commission_rates.rate > 0.0)}
+      {renderBadge(cilHeart, "Validator commission is greater than 0", commissionPercent() > 0.0)}
       {renderBadge(cilGrain, "Validator is not in the top 10", validator.rank > 10)}
       {renderBadge(cilScreenDesktop, "Validator has a website", website(), website())}
-      {renderBadge(cilLifeRing, "Validator has a security contact", validator.description.security_contact, `mailto:${validator.description.security_contact}`)}
+      {renderBadge(cilLifeRing, "Validator has a security contact", validator.description?.security_contact, `mailto:${validator.description?.security_contact}`)}
       {renderBadge(cilLoopCircular, "Validator offers REStake", validator.restake?.address, `https://restake.app/${chain.path}`)}
     </>
   )

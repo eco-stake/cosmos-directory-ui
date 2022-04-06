@@ -4,6 +4,7 @@ import {
   cibAtom,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
+import ChainImage from './components/ChainImage'
 
 const _nav = (chains) => {
   let nav = [
@@ -29,7 +30,7 @@ const _nav = (chains) => {
       component: CNavItem,
       name: chain.pretty_name,
       to: '/' + chain.path,
-      icon: <img src={chain.image || 'https://craftypixels.com/placeholder-image/30x30/ffffff/a6a6a6&text=missing'} width={30} height={30} className="me-4 rounded-circle" />,
+      icon: <ChainImage chain={chain} className="me-4" />,
       // items: [
       //   {
       //     component: CNavItem,

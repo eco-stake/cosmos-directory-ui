@@ -1,13 +1,18 @@
+import { Fragment } from "react";
 import Panel from "./Panel";
 import DataTable from './DataTable'
 
 function ConfigurationPanel(props) {
-  const { chain } = props
+  const { chain, status } = props
 
   const data = [
     {
       key: 'Chain ID',
       value: chain.chain_id
+    },
+    {
+      key: 'Height',
+      value: status.height
     },
   ]
 
@@ -64,6 +69,19 @@ function ConfigurationPanel(props) {
     data.push({
       key: 'Genesis URL',
       value: <a href={url} target="_blank">{url}</a>
+    })
+  }
+
+  if (chain.explorers) {
+    data.push({
+      key: 'Explorers',
+      value: chain.explorers.map(explorer => {
+        return (
+          <Fragment key={explorer.url}>
+            <a href={explorer.url} key={explorer.url} target="_blank">{explorer.url}</a><br />
+          </Fragment>
+        )
+      })
     })
   }
 

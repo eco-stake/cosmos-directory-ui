@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 import _ from 'lodash'
 
 import DataTable from './DataTable'
+import ChainImage from './ChainImage'
 
 function ChainList(props) {
   function renderChain(chain){
@@ -19,6 +20,10 @@ function ChainList(props) {
       {
         key: 'Chain',
         value: chain.chain_id
+      },
+      {
+        key: 'Height',
+        value: chain.height
       },
       {
         key: 'Token',
@@ -38,7 +43,7 @@ function ChainList(props) {
         <CCard className="mb-3" style={{ maxWidth: '540px' }}>
           <CRow className="g-0">
             <CCol md={3} className="text-center">
-              <img src={chain.image || 'https://craftypixels.com/placeholder-image/60x60/ffffff/a6a6a6&text=missing'} className="m-2 rounded-circle shadow overflow-hidden" width={60} height={60} />
+              <ChainImage chain={chain} width={60} height={60} className="m-2 shadow overflow-hidden" />
             </CCol>
             <CCol md={9}>
               <CCardBody>

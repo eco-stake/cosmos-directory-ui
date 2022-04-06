@@ -2,7 +2,6 @@ import React from "react";
 import { 
   CRow, 
 } from '@coreui/react'
-import OverviewPanel from "./OverviewPanel";
 import ConfigurationPanel from './ConfigurationPanel';
 import AssetsPanel from "./AssetsPanel";
 
@@ -11,7 +10,7 @@ function ChainDetails(props) {
 
   return (
     <CRow md={{ cols: 1, gutter: 4 }} lg={{ cols: 2 }}>
-      <ConfigurationPanel chain={chain} />
+      <ConfigurationPanel chain={chain} status={status} />
       <AssetsPanel chain={chain} assetlist={assetlist} />
     </CRow>
   )

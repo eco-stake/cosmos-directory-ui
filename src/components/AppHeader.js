@@ -18,6 +18,7 @@ import Moment from 'react-moment'
 import _ from 'lodash'
 
 import CommandPalette from 'react-command-palette';
+import ChainImage from './ChainImage'
 
 const AppHeader = (props) => {
   const dispatch = useDispatch()
@@ -59,7 +60,7 @@ const AppHeader = (props) => {
           {props.chain ? (
             <>
               <Link to="/" className="text-reset text-decoration-none">cosmos.directory</Link>
-              <Link to={'/' + props.chain.path} onClick={() => props.setShowCommands(true)} className="text-secondary text-decoration-none"> / {props.chain.path}</Link>
+              <Link to={'/' + props.chain.path} onClick={() => props.setShowCommands(true)} className="text-secondary text-decoration-none"> / {props.chain.path} <ChainImage chain={props.chain} width={20} height={20} className="me-1 mb-1 rounded-circle shadow-sm" /></Link>
             </>
           ) : (
             <Link to="/" onClick={() => props.setShowCommands(true)} className="text-reset text-decoration-none">cosmos.directory</Link>
@@ -90,7 +91,7 @@ const AppHeader = (props) => {
             })}
           </CNav>
         )}
-        <p className="ms-auto small"><em>Chains updated: {lastUpdate()}</em></p>
+        <p className="ms-auto small"><em><a href="https://github.com/cosmos/chain-registry" target="_blank" className="text-reset">Chain Registry</a> updated: {lastUpdate()}</em></p>
       </CContainer>
     </CHeader>
   )

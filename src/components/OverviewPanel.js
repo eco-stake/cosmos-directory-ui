@@ -9,6 +9,7 @@ import {
 import _ from "lodash";
 import Panel from "./Panel";
 import DataTable from './DataTable'
+import ChainImage from "./ChainImage";
 
 function OverviewPanel(props) {
   const { chain, assetlist, status } = props
@@ -17,21 +18,17 @@ function OverviewPanel(props) {
     return assetlist.assets && assetlist.assets[0];
   }
 
-  function image(){
-    return baseAsset()?.logo_URIs?.svg || baseAsset()?.logo_URIs?.png
-  }
-
   function render(){
     const data = [
       {
         key: 'Chain ID',
         value: chain.chain_id
+      },
+      {
+        key: 'Height',
+        value: status.height
       }
     ]
-    if (chain.codebase?.recommended_version) data.push({
-      key: 'Version',
-      value: chain.codebase.recommended_version
-    })
     if (baseAsset()?.symbol) data.push({
       key: 'Token',
       value: baseAsset()?.symbol
@@ -62,7 +59,7 @@ function OverviewPanel(props) {
       <Panel key={'overview-' + chain.chain_name}>
         <CRow className="g-0">
           <CCol md={2} className="text-center">
-            <img src={image() || 'https://craftypixels.com/placeholder-image/60x60/ffffff/a6a6a6&text=missing'} className="m-2 rounded-circle shadow overflow-hidden" width={80} height={80} />
+            <ChainImage chain={chain} assetlist={assetlist} width={80} height={80} className="m-2 shadow overflow-hidden" />
           </CCol>
           <CCol md={10}>
             <CCardBody>

@@ -13,22 +13,34 @@ import Panel from "./Panel"
 import { ValidatorBadges } from "./ValidatorBadges";
 
 function ValidatorsPanel(props) {
-  const types = ['active', 'inactive']
-
   const { chain, validators } = props
+  let types = ['active', 'inactive']
+  const unknownValidators = typeValidators('unknown')
+  if (unknownValidators.length > 0) {
+    if(unknownValidators.length == validators.length){
+      types = ['unknown']
+    }else{
+      types.push('unknown')
+    }
+  }
+
   const [activeKey, setActiveKey] = useState(types[0])
+
+  function typeValidators(type){
+    if (!validators) return []
+    switch (type) {
+      case 'active':
+        return validators.filter(el => el.status === 'BOND_STATUS_BONDED')
+      case 'inactive':
+        return validators.filter(el => el.status && el.status !== 'BOND_STATUS_BONDED')
+      case 'unknown':
+        return validators.filter(el => !el.status)
+    }
+  }
 
   function filterValidators(type){
     if(!validators) return []
-    let filtered = []
-    switch(type){
-      case 'active':
-        filtered = validators.filter(el => el.status === 'BOND_STATUS_BONDED')
-        break;
-      case 'inactive':
-        filtered = validators.filter(el => el.status !== 'BOND_STATUS_BONDED')
-        break;
-    }
+    let filtered = typeValidators(type)
     if(props.limit) return _.take(filtered, props.limit)
 
     return filtered
@@ -42,7 +54,7 @@ function ValidatorsPanel(props) {
             return (
               <CNavItem key={type}>
                 <CNavLink className="small" role="button" active={activeKey === type} onClick={() => setActiveKey(type)}>
-                  {_.startCase(type)}
+                  {_.startCase(type)} ({typeValidators(type).length})
                 </CNavLink>
               </CNavItem>
             )
@@ -76,10 +88,10 @@ function ValidatorsPanel(props) {
                               width={20} height={20} className="m-2 rounded-circle shadow overflow-hidden" />
                           </td>
                           <td className="align-middle">
-                            {validator.moniker}
+                            {validator.moniker || validator.name}
                           </td>
                           {!props.limit && (
-                            <td className="d-none d-xl-table-cell w-50">{validator.description.details}</td>
+                            <td className="d-none d-xl-table-cell w-50">{validator.description?.details}</td>
                           )}
                           {type === 'active'
                             ? (
@@ -92,7 +104,9 @@ function ValidatorsPanel(props) {
                               </td>
                             )}
                           <td className="align-middle text-center" width={60}>
-                            {_.round(parseFloat(validator.commission.commission_rates.rate) * 100, 2)}%
+                            {validator.commission?.commission_rates && (
+                              <span>{_.round(parseFloat(validator.commission.commission_rates.rate) * 100, 2)}%</span>
+                            )}
                           </td>
                           <td className="align-middle" width={180}>
                             <div className="text-start">
