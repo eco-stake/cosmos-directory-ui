@@ -1,3 +1,6 @@
+import { 
+  CTooltip
+} from '@coreui/react'
 import Panel from "./Panel";
 import DataTable from './DataTable'
 
@@ -26,6 +29,9 @@ function SourcesPanel(props) {
     },
     {
       key: 'API Proxies',
+      label: (
+        <CTooltip content="Load balanced, health checked and minimal caching of the Chain Registry public APIs"><span className="tooltip-abbr">API Proxies</span></CTooltip>
+      ),
       value: (
         <>
           <a href={`https://rpc.cosmos.directory/${chain.path}`} target="_blank">rpc.cosmos.directory/{chain.path}</a><br />
@@ -35,6 +41,9 @@ function SourcesPanel(props) {
     },
     {
       key: 'API Status',
+      label: (
+        <CTooltip content="Current status of the Chain Registry public APIs"><span className="tooltip-abbr">API Status</span></CTooltip>
+      ),
       value: (
         <>
           <a href={`https://status.cosmos.directory/${chain.path}`} target="_blank">status.cosmos.directory/{chain.path}</a><br />

@@ -35,11 +35,11 @@ function OverviewPanel(props) {
     })
     data.push(...[
       {
-        key: 'Status',
+        key: 'Chain Status',
         value: chain.status === 'live' ? <span className="text-success p-0">Live</span> : <span className="text-danger p-0">{_.startCase(chain.status)}</span>
       },
       {
-        key: 'APIs',
+        key: 'API Status',
         value: status.available ? <span className="text-success p-0">Available</span> : <span className="text-danger p-0">Unavailable</span>
       },
     ])

@@ -79,11 +79,14 @@ function ValidatorsPanel(props) {
                       )}
                       <th className="text-center">{props.limit ? 'Comm.' : 'Commission'}</th>
                       <th>Badges</th>
+                      {!props.limit &&
+                        <th></th>
+                      }
                     </tr>
                     {filterValidators(type).map(validator => {
                       return (
                         <tr key={validator.address}>
-                          <td width={20}>
+                          <td width={20} className="align-middle">
                             <img src={validator.mintscan_image || validator.keybase_image || 'https://craftypixels.com/placeholder-image/30x30/ffffff/a6a6a6&text=missing'}
                               width={20} height={20} className="m-2 rounded-circle shadow overflow-hidden" />
                           </td>
@@ -113,6 +116,11 @@ function ValidatorsPanel(props) {
                               <ValidatorBadges validator={validator} chain={chain} />
                             </div>
                           </td>
+                          {!props.limit &&
+                            <td className="align-middle text-center">
+                              <a href={`https:/restake.app/${chain.path}`} target="_blank" class="btn btn-light btn-sm">Stake</a>
+                            </td>
+                          }
                         </tr>
                       )
                     })}
