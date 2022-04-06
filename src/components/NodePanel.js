@@ -25,6 +25,16 @@ function NodePanel(props) {
   const data = apiTypes.reduce((sum, type) => {
     const apis = props.apis[type]
     if (!apis || !apis.length) return sum
+    apis.sort((a, b) => {
+      const aStatus = status[type]?.current[a.address]
+      const bStatus = status[type]?.current[b.address]
+      if (aStatus.available === bStatus.available){
+        return parseInt(aStatus.responseTime) - parseInt(bStatus.responseTime)
+        // return a.address > b.address ? 1 : -1
+      };
+      if (aStatus.available) return -1;
+      return 1;
+    })
     sum[type] = apis.map(api => {
       const apiStatus = status[type]?.current[api.address]
       const addressLink = <a href={api.address} target="_blank">{api.address}</a>
@@ -46,7 +56,7 @@ function NodePanel(props) {
               </tr>
               <tr>
                 <td>Response time</td>
-                <td>{apiStatus.responseTime}</td>
+                <td>{apiStatus.responseTime || '-'}ms</td>
               </tr>
               <tr>
                 <td>Last check</td>

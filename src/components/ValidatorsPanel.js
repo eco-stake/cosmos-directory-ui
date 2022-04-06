@@ -118,7 +118,7 @@ function ValidatorsPanel(props) {
                           </td>
                           {!props.limit &&
                             <td className="align-middle text-center">
-                              <a href={`https:/restake.app/${chain.path}`} target="_blank" class="btn btn-light btn-sm">Stake</a>
+                              <a href={`https:/restake.app/${chain.path}`} target="_blank" className="btn btn-light btn-sm">Stake</a>
                             </td>
                           }
                         </tr>
