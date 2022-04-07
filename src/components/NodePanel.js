@@ -84,22 +84,30 @@ function NodePanel(props) {
     return sum
   }, data)
 
+  const tabs = {
+    'rpc': 'RPC',
+    'grpc': 'GRPC',
+    'rest': 'REST',
+    'seeds': 'Seeds',
+    'persistent_peers': 'Peers'
+  }
+
   return (
     <Panel title={`${props.title || 'Nodes'}`}>
       <>
         <CNav variant="tabs" role="tablist">
-          {types.map(type => {
+          {types.filter(el => data[el] && data[el].length).map(type => {
             return (
               <CNavItem key={type}>
-                <CNavLink className="small" role="button" active={activeKey === type} onClick={() => setActiveKey(type)}>
-                  {apiTypes.includes(type) ? type.toUpperCase() : _.startCase(type)}
+                <CNavLink className="small px-2 px-md-3" role="button" active={activeKey === type} onClick={() => setActiveKey(type)}>
+                  {tabs[type] || _.startCase(type)}
                 </CNavLink>
               </CNavItem>
             )
           })}
         </CNav>
         <CTabContent>
-          {apiTypes.map(type => {
+          {apiTypes.filter(el => data[el] && data[el].length).map(type => {
             return (
               <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === type} key={type}>
                 {['rpc', 'rest'].includes(type) &&
@@ -107,14 +115,14 @@ function NodePanel(props) {
                     <strong>{type.toUpperCase()} Proxy:</strong> <a href={`https://${type}.cosmos.directory/${chain.path}`} target="_blank">{`https://${type}.cosmos.directory/${chain.path}`}</a>
                   </p>
                 }
-                <DataTable bodyClass="small" columnclass="align-middle" data={props.limit ? _.take(data[type], props.limit) : data[type]} header={['Provider/Address', 'Check']} />
+                <DataTable bodyClass="small" columnclass="align-middle" valueclass="d-none d-md-table-cell" data={props.limit ? _.take(data[type], props.limit) : data[type]} header={['Provider/Address', 'Check']} />
               </CTabPane>
             )
           })}
-          {peerTypes.map(type => {
+          {peerTypes.filter(el => data[el] && data[el].length).map(type => {
             return (
               <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === type} key={type}>
-                <DataTable bodyClass="small" columnclass="align-middle small" data={data[type]} header={['Provider', 'Address']} />
+                <DataTable bodyClass="small" columnclass="align-middle small" labelclass="d-none d-md-table-cell" valueclass="text-break" data={data[type]} header={['Provider', 'Address']} />
               </CTabPane>
             )
           })}

@@ -53,7 +53,7 @@ function ValidatorsPanel(props) {
           {types.map(type => {
             return (
               <CNavItem key={type}>
-                <CNavLink className="small" role="button" active={activeKey === type} onClick={() => setActiveKey(type)}>
+                <CNavLink className="small px-2 px-md-3" role="button" active={activeKey === type} onClick={() => setActiveKey(type)}>
                   {_.startCase(type)} ({typeValidators(type).length})
                 </CNavLink>
               </CNavItem>
@@ -73,11 +73,11 @@ function ValidatorsPanel(props) {
                       )}
                       {type === 'active'
                       ? (
-                        <th className="text-center">Rank</th>
+                        <th className="text-center d-none d-md-table-cell">Rank</th>
                       ) : (
-                        <th className="text-center">Status</th>
+                        <th className="text-center d-none d-md-table-cell">Status</th>
                       )}
-                      <th className="text-center">{props.limit ? 'Comm.' : 'Commission'}</th>
+                      <th className="text-center d-none d-md-table-cell">{props.limit ? 'Comm.' : 'Commission'}</th>
                       <th>Badges</th>
                       {!props.limit &&
                         <th></th>
@@ -88,7 +88,7 @@ function ValidatorsPanel(props) {
                         <tr key={validator.address}>
                           <td width={20} className="align-middle">
                             <img src={validator.mintscan_image || validator.keybase_image || 'https://craftypixels.com/placeholder-image/30x30/ffffff/a6a6a6&text=missing'}
-                              width={20} height={20} className="m-2 rounded-circle shadow overflow-hidden" />
+                              width={20} height={20} className="m-md-2 rounded-circle shadow overflow-hidden" />
                           </td>
                           <td className="align-middle">
                             {validator.moniker || validator.name}
@@ -98,15 +98,15 @@ function ValidatorsPanel(props) {
                           )}
                           {type === 'active'
                             ? (
-                              <td className="align-middle text-center" width={60}>
+                              <td className="align-middle text-center d-none d-md-table-cell" width={60}>
                                 {validator.rank}
                               </td>
                             ) : (
-                              <td className="align-middle text-center" width={60}>
+                              <td className="align-middle text-center d-none d-md-table-cell" width={60}>
                                 {validator.jailed && 'Jailed'}
                               </td>
                             )}
-                          <td className="align-middle text-center" width={60}>
+                          <td className="align-middle text-center d-none d-md-table-cell" width={60}>
                             {validator.commission?.commission_rates && (
                               <span>{_.round(parseFloat(validator.commission.commission_rates.rate) * 100, 2)}%</span>
                             )}
@@ -115,7 +115,7 @@ function ValidatorsPanel(props) {
                             <ValidatorBadges validator={validator} chain={chain} />
                           </td>
                           {!props.limit &&
-                            <td className="align-middle text-center">
+                            <td className="align-middle text-center d-none d-md-table-cell">
                               <a href={`https:/restake.app/${chain.path}`} target="_blank" className="btn btn-light btn-sm">Stake</a>
                             </td>
                           }

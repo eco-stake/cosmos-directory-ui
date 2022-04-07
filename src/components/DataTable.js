@@ -11,18 +11,15 @@ function DataTable(props){
       <tbody className={bodyClass}>
         {header && (
           <tr>
-          {header.map((label) => {
-            return (
-              <th key={label}>{label}</th>
-            )
-          })}
+            <th className={`${props.labelclass || ''}`}>{header[0]}</th>
+            <th className={`${props.valueclass || ''}`}>{header[1]}</th>
           </tr>
         )}
         {data.map(({key, label, value}) => {
           return (
             <tr key={key}>
-              <td className={`w-25 ${props.columnclass} ${props.labelclass}`} scope="row">{label || key}</td>
-              <td className={`w-25 ${props.columnclass} ${props.valueclass}`}>{value}</td>
+              <td className={`${props.columnclass || ''} ${props.labelclass || ''}`} scope="row">{label || key}</td>
+              <td className={`${props.columnclass || ''} ${props.valueclass || ''}`}>{value}</td>
             </tr>
           )
         })}

@@ -87,7 +87,7 @@ function ConfigurationPanel(props) {
 
   return (
     <Panel title="Configuration">
-      <DataTable bodyClass="small" data={data} />
+      <DataTable bodyClass="small" valueclass="text-break" data={data} />
     </Panel>
   )
 }

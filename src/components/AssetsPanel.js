@@ -98,7 +98,7 @@ function AssetsPanel(props) {
           {assets.map(asset => {
             return (
               <CNavItem key={asset.symbol}>
-                <CNavLink className="small" role="button" active={activeKey === asset.symbol} onClick={() => setActiveKey(asset.symbol)}>
+                <CNavLink className="small px-2 px-md-3" role="button" active={activeKey === asset.symbol} onClick={() => setActiveKey(asset.symbol)}>
                   {asset.symbol}
                 </CNavLink>
               </CNavItem>

@@ -12,6 +12,18 @@
   z-index:9999;
 }
 
+.atom-input, .atom-modal{
+  width:auto !important;
+}
+
+.atom-modal{
+  min-width: 300px;
+}
+
+.atom-input{
+  min-width:100%;
+}
+
 .tooltip-abbr{
   text-decoration-line: underline;
   text-decoration-style: dotted;

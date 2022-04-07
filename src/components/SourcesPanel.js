@@ -54,7 +54,7 @@ function SourcesPanel(props) {
   ]
   return (
     <Panel key={'data-' + chain.chain_name} title="Data sources">
-      <DataTable bodyClass="small" data={data} />
+      <DataTable bodyClass="small" labelclass="d-none d-sm-table-cell" data={data} />
     </Panel>
   )
 }

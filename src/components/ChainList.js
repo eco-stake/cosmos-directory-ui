@@ -48,7 +48,7 @@ function ChainList(props) {
             <CCol md={9}>
               <CCardBody>
                 <CCardTitle><Link to={'/' + chain.path} className="stretched-link text-reset">{chain.pretty_name}</Link></CCardTitle>
-                <DataTable small className="mt-3" bodyClass="small" data={data} />
+                <DataTable small className="mt-3" bodyClass="small" labelclass="d-none d-sm-table-cell" data={data} />
               </CCardBody>
             </CCol>
           </CRow>
