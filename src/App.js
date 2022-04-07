@@ -35,10 +35,7 @@ function App() {
 
   useEffect(() => {
     if(!chains){
-      directory.getChains()
-        .then(chains => {
-          setChains(chains)
-        })
+      getChains()
     }
   });
 
@@ -75,24 +72,43 @@ function App() {
     }
   })
 
-  function setSection(section){
-    if(section !== activeSection){
+  useEffect(() => {
+    let refreshInterval
+    if(chains){
+      refreshInterval = setInterval(() => {
+        getChains()
+      }, 30000)
+    }
+    return () => {
+      clearInterval(refreshInterval)
+    }
+  }, [chains])
+
+  function getChains(){
+    return directory.getChains()
+      .then(chains => {
+        setChains(chains)
+      })
+  }
+
+  function setSection(section) {
+    if (section !== activeSection) {
       setActiveSection(section)
-      if(section !== 'overview'){
+      if (section !== 'overview') {
         navigate(`/${chain.path}/${section}`)
-      }else{
+      } else {
         navigate(`/${chain.path}`)
       }
     }
   }
 
-  function chainsByPath(){
-    if(!chains) return {}
+  function chainsByPath() {
+    if (!chains) return {}
 
     return chains.chains.reduce((a, v) => ({ ...a, [v.path]: v }), {})
   }
 
-  if(!chains || !status){
+  if (!chains || !status) {
     return (
       <div className="pt-3 text-center">
         <CSpinner />
@@ -105,7 +121,7 @@ function App() {
       <AppSidebar chains={chainsByPath()} chain={chain} />
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
         <AppHeader chains={chains} chain={chain} chainRepository={chains.repository}
-          activeSection={activeSection} setSection={setSection} 
+          activeSection={activeSection} setSection={setSection}
           showCommands={showCommands} setShowCommands={setShowCommands} />
         <div className="body flex-grow-1 px-3">
           {chain
@@ -118,7 +134,7 @@ function App() {
         <AppFooter />
       </div>
     </div>
-  ); 
-} 
+  );
+}
 
 export default App
