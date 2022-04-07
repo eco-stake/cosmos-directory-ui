@@ -11,7 +11,7 @@ function ChainOverview(props) {
   const { chain, assetlist, validators, status } = props
 
   return (
-    <CRow md={{ cols: 1, gutter: 4 }} lg={{ cols: 2 }}>
+    <CRow xs={{ cols: 1, gutter: 4 }} xl={{ cols: 2 }}>
       <OverviewPanel chain={chain} assetlist={assetlist} status={status} />
       <SourcesPanel chain={chain} />
       <ValidatorsPanel chain={chain} validators={validators} limit={10} />

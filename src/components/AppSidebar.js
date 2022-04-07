@@ -35,7 +35,7 @@ const AppSidebar = (props) => {
         <Link to="/" className="text-reset sidebar-brand-full">
           <img src={logo} srcSet={`${logo2x} 2x, ${logo3x} 3x`} alt="cosmos.directory" className="img-fluid px-3" />
         </Link>
-        <a href="/" className="text-reset text-decoration-none sidebar-brand-narrow">⚛️ · 📖</a>
+        <Link to="/" className="text-reset text-decoration-none sidebar-brand-narrow">⚛️ · 📖</Link>
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>

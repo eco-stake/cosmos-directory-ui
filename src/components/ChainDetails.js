@@ -9,7 +9,7 @@ function ChainDetails(props) {
   const { chain, assetlist, status } = props
 
   return (
-    <CRow md={{ cols: 1, gutter: 4 }} lg={{ cols: 2 }}>
+    <CRow xs={{ cols: 1, gutter: 4 }} xl={{ cols: 2 }}>
       <ConfigurationPanel chain={chain} status={status} />
       <AssetsPanel chain={chain} assetlist={assetlist} />
     </CRow>

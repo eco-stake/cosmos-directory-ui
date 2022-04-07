@@ -59,7 +59,7 @@ function ChainList(props) {
 
   return (
     <CContainer lg>
-      <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 4 }}>
+      <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 2 }} lg={{ cols: 3 }} xxl={{ cols: 4 }}>
         {Object.values(props.chains).map(chain => {
           return renderChain(chain)
         })}
