@@ -27,6 +27,11 @@ function CosmosDirectory(){
       .then(res => res.data)
   }
 
+  function getChain(path){
+    return axios.get([chainsUrl, path].join('/'))
+      .then(res => { return {...res.data, path} })
+  }
+
   function getChainStatus(path){
     return axios.get(statusUrl + '/' + path)
       .then(res => res.data)
@@ -58,6 +63,7 @@ function CosmosDirectory(){
     chainsUrl,
     getStatus,
     getChains,
+    getChain,
     getChainStatus,
     getChainData,
     getChainAssetlist,

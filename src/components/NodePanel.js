@@ -60,11 +60,15 @@ function NodePanel(props) {
                   </tr>
                   <tr>
                     <td>Height</td>
-                    <td>{apiStatus.blockHeight}</td>
+                    <td className={apiStatus.blockHeight < chain.height - 10 ? 'text-danger' : ''}>{apiStatus.blockHeight}</td>
                   </tr>
                   <tr>
                     <td>Response time</td>
                     <td>{apiStatus.responseTime || '-'}ms</td>
+                  </tr>
+                  <tr>
+                    <td>Last error</td>
+                    <td>{apiStatus.lastError}<br /><Moment fromNow>{apiStatus.lastErrorAt}</Moment></td>
                   </tr>
                   <tr>
                     <td>Last check</td>

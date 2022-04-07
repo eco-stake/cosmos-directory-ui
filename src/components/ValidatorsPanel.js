@@ -94,7 +94,7 @@ function ValidatorsPanel(props) {
                             {validator.moniker || validator.name}
                           </td>
                           {!props.limit && (
-                            <td className="d-none d-xl-table-cell w-50">{validator.description?.details}</td>
+                            <td className="d-none d-xl-table-cell">{validator.description?.details}</td>
                           )}
                           {type === 'active'
                             ? (

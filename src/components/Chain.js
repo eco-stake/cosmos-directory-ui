@@ -18,8 +18,8 @@ function Chain(props) {
   const [status, setStatus] = useState()
 
   function getChainData() {
-    directory.getChainData(chainPath).then(chain => {
-      setChain(chain);
+    directory.getChain(chainPath).then(chain => {
+      setChain(chain.chain);
     });
   }
 

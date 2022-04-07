@@ -64,7 +64,7 @@ function OverviewPanel(props) {
           <CCol md={10}>
             <CCardBody>
               <CCardTitle className="mb-3">{chain.pretty_name}</CCardTitle>
-              <DataTable bodyClass="small" data={data} />
+              <DataTable bodyClass="small" valueclass="text-break" data={data} />
               <div className="text-end">
                 <Link to={`/${chain.path}/chain`} className="btn btn-light">See more</Link>
               </div>
