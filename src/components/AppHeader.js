@@ -32,7 +32,7 @@ const AppHeader = (props) => {
 
     const date = new Date(chainRepository.timestamp * 1000)
     const { url, commit } = chainRepository
-    return <a href={`${url}/commit/${commit}`} target="_blank"><Moment fromNow>{date}</Moment></a>
+    return <a href={`${url}/commit/${commit}`} className="text-reset" target="_blank"><Moment fromNow>{date}</Moment></a>
   }
 
   function commands(){
@@ -99,7 +99,8 @@ const AppHeader = (props) => {
             })}
           </CNav>
         )}
-        <p className={`ms-auto small${chain && ' d-none d-md-block'}`}><em><a href="https://github.com/cosmos/chain-registry" target="_blank" className="text-reset">Chain Registry</a> updated: {lastUpdate()}</em></p>
+        <p className={`ms-auto small${chain && ' d-none d-md-block'}`}>
+          <em><a href="https://github.com/cosmos/chain-registry" target="_blank" className="text-reset">Chain Registry</a> updated: {lastUpdate()}</em></p>
       </CContainer>
     </CHeader>
   )
