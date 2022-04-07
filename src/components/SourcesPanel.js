@@ -56,7 +56,7 @@ function SourcesPanel(props) {
     <Panel key={'data-' + chain.chain_name} title="Data sources">
       <DataTable bodyClass="small" labelclass="d-none d-sm-table-cell" data={data} />
       <div className="text-end">
-        <a href={`https://github.com/eco-stake/cosmos-directory`} target="_blank" className="btn btn-light">See API docs</a>
+        <a href="https://github.com/eco-stake/cosmos-directory#api-documentation" target="_blank" className="btn btn-light">See API docs</a>
       </div>
     </Panel>
   )
