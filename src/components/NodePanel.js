@@ -42,30 +42,37 @@ function NodePanel(props) {
       const addressLink = <a href={api.address} target="_blank">{api.address}</a>
       return {
         key: type + api.address,
-        label: api.provider ? <span>{api.provider}<br />{addressLink}</span> : addressLink,
+        label: api.provider ? <span>{api.provider}<br /><span className="small">{addressLink}</span></span> : <span className="small">{addressLink}</span>,
         value: !apiStatus ? (
-          <span>Status: <em>Unknown</em></span>
+          <span><em>Unknown</em></span>
           ) : (
-          <CTable small>
-            <tbody className="small">
-              <tr>
-                <td>Status</td>
-                <td>{apiStatus.available ? <span className="text-success p-0">Available</span> : <span className="text-danger p-0">Unavailable</span>}</td>
-              </tr>
-              <tr>
-                <td>Height</td>
-                <td>{apiStatus.blockHeight}</td>
-              </tr>
-              <tr>
-                <td>Response time</td>
-                <td>{apiStatus.responseTime || '-'}ms</td>
-              </tr>
-              <tr>
-                <td>Last check</td>
-                <td><Moment fromNow>{apiStatus.lastCheck}</Moment></td>
-              </tr>
-            </tbody>
-          </CTable>
+            <>
+              {apiStatus.available ? (
+                <span className="d-xs-inline d-md-none text-success small">{apiStatus.responseTime || '-'}ms</span>
+              ) : (
+                <span className="d-xs-inline d-md-none text-danger small">N/A</span>
+              )}
+              <CTable small className="d-none d-md-table">
+                <tbody className="small">
+                  <tr>
+                    <td>Status</td>
+                    <td>{apiStatus.available ? <span className="text-success p-0">Available</span> : <span className="text-danger p-0">Unavailable</span>}</td>
+                  </tr>
+                  <tr>
+                    <td>Height</td>
+                    <td>{apiStatus.blockHeight}</td>
+                  </tr>
+                  <tr>
+                    <td>Response time</td>
+                    <td>{apiStatus.responseTime || '-'}ms</td>
+                  </tr>
+                  <tr>
+                    <td>Last check</td>
+                    <td><Moment fromNow>{apiStatus.lastCheck}</Moment></td>
+                  </tr>
+                </tbody>
+              </CTable>
+            </>
         )
       }
     })
@@ -117,7 +124,7 @@ function NodePanel(props) {
                     <strong>{type.toUpperCase()} Proxy:</strong> <a href={`https://${type}.cosmos.directory/${chain.path}`} target="_blank">{`https://${type}.cosmos.directory/${chain.path}`}</a>
                   </p>
                 }
-                <DataTable bodyClass="small" columnclass="align-middle" valueclass="d-none d-md-table-cell" data={props.limit ? _.take(data[type], props.limit) : data[type]} header={['Provider/Address', 'Check']} />
+                <DataTable bodyClass="small" columnclass="align-middle" data={props.limit ? _.take(data[type], props.limit) : data[type]} header={['Provider/Address', 'Check']} />
               </CTabPane>
             )
           })}
