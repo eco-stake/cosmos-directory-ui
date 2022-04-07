@@ -68,11 +68,11 @@ function NodePanel(props) {
                   </tr>
                   <tr>
                     <td>Last error</td>
-                    <td>{apiStatus.lastError}<br /><Moment fromNow>{apiStatus.lastErrorAt}</Moment></td>
+                    <td>{apiStatus.lastError}<br /><em><Moment fromNow>{apiStatus.lastErrorAt}</Moment></em></td>
                   </tr>
                   <tr>
                     <td>Last check</td>
-                    <td><Moment fromNow>{apiStatus.lastCheck}</Moment></td>
+                    <td><em><Moment fromNow>{apiStatus.lastCheck}</Moment></em></td>
                   </tr>
                 </tbody>
               </CTable>

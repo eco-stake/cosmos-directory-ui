@@ -67,14 +67,14 @@ function ValidatorsPanel(props) {
                 <CTable>
                   <tbody className="small">
                     <tr>
+                      {type === 'active' && (
+                        <th className="align-middle text-center d-none d-lg-table-cell">#</th>
+                      )}
                       <th colSpan={2}>Validator</th>
                       {!props.limit && (
                         <th className="d-none d-xl-table-cell">Details</th>
                       )}
-                      {type === 'active'
-                      ? (
-                        <th className="text-center d-none d-md-table-cell">Rank</th>
-                      ) : (
+                      {type !== 'active' && (
                         <th className="text-center d-none d-md-table-cell">Status</th>
                       )}
                       <th className="text-center d-none d-md-table-cell">{props.limit ? 'Comm.' : 'Commission'}</th>
@@ -86,6 +86,11 @@ function ValidatorsPanel(props) {
                     {filterValidators(type).map(validator => {
                       return (
                         <tr key={validator.address}>
+                          {type === 'active' && (
+                            <td className="align-middle text-center d-none d-lg-table-cell">
+                              {validator.rank}
+                            </td>
+                          )}
                           <td width={20} className="align-middle">
                             <img src={validator.mintscan_image || validator.keybase_image || 'https://craftypixels.com/placeholder-image/30x30/ffffff/a6a6a6&text=missing'}
                               width={20} height={20} className="m-md-2 rounded-circle shadow overflow-hidden" />
@@ -96,16 +101,11 @@ function ValidatorsPanel(props) {
                           {!props.limit && (
                             <td className="d-none d-xl-table-cell">{validator.description?.details}</td>
                           )}
-                          {type === 'active'
-                            ? (
-                              <td className="align-middle text-center d-none d-md-table-cell" width={60}>
-                                {validator.rank}
-                              </td>
-                            ) : (
-                              <td className="align-middle text-center d-none d-md-table-cell" width={60}>
-                                {validator.jailed && 'Jailed'}
-                              </td>
-                            )}
+                          {type !== 'active' && (
+                            <td className="align-middle text-center d-none d-md-table-cell" width={60}>
+                              {validator.jailed && 'Jailed'}
+                            </td>
+                          )}
                           <td className="align-middle text-center d-none d-md-table-cell" width={60}>
                             {validator.commission?.commission_rates && (
                               <span>{_.round(parseFloat(validator.commission.commission_rates.rate) * 100, 2)}%</span>
