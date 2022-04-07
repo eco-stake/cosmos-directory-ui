@@ -12,7 +12,7 @@ import {
   CNavItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilSearch, cilMenu } from '@coreui/icons'
+import { cilSearch, cilMenu, cibAtom } from '@coreui/icons'
 import { Link, useNavigate } from 'react-router-dom'
 import Moment from 'react-moment'
 import _ from 'lodash'
@@ -67,7 +67,7 @@ const AppHeader = (props) => {
           {props.chain ? (
             <>
               <Link to="/" className="text-reset text-decoration-none d-none d-sm-inline">cosmos.directory</Link>
-              <Link to="/" className="text-reset text-decoration-none d-sm-none">📖</Link>
+              <Link to="/" className="text-reset text-decoration-none d-sm-none"><CIcon icon={cibAtom} size="lg" className="mt-1" /></Link>
               <Link to={'/' + props.chain.path} onClick={() => props.setShowCommands(true)} className="text-secondary text-decoration-none"> / {props.chain.path} <ChainImage chain={props.chain} width={20} height={20} className="me-1 mb-1 rounded-circle shadow-sm" /></Link>
             </>
           ) : (

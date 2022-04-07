@@ -20,7 +20,9 @@ function NodePanel(props) {
   const apiTypes = Object.keys(props.apis || {})
   const peerTypes = Object.keys(props.peers || {})
   const types = apiTypes.concat(peerTypes)
-  const [activeKey, setActiveKey] = useState(types[0])
+  const [activeKey, setActiveKey] = useState(types.find(type => {
+    return (props.apis && props.apis[type]?.length) || (props.peers && props.peers[type]?.length)
+  }))
 
   const data = apiTypes.reduce((sum, type) => {
     const apis = props.apis[type]

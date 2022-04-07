@@ -31,7 +31,7 @@ const AppSidebar = (props) => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
     >
-      <CSidebarBrand className="d-none d-md-flex" to="/">
+      <CSidebarBrand to="/">
         <Link to="/" className="text-reset sidebar-brand-full">
           <img src={logo} srcSet={`${logo2x} 2x, ${logo3x} 3x`} alt="cosmos.directory" className="img-fluid px-3" />
         </Link>

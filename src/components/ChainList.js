@@ -48,7 +48,7 @@ function ChainList(props) {
             <CCol md={9}>
               <CCardBody>
                 <CCardTitle><Link to={'/' + chain.path} className="stretched-link text-reset">{chain.pretty_name}</Link></CCardTitle>
-                <DataTable small className="mt-3" bodyClass="small" labelclass="d-none d-sm-table-cell" data={data} />
+                <DataTable small className="mt-3" bodyClass="small" data={data} />
               </CCardBody>
             </CCol>
           </CRow>
@@ -59,7 +59,7 @@ function ChainList(props) {
 
   return (
     <CContainer lg>
-      <CRow xs={{ cols: 2, gutter: 4 }} md={{ cols: 4 }}>
+      <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 4 }}>
         {Object.values(props.chains).map(chain => {
           return renderChain(chain)
         })}
