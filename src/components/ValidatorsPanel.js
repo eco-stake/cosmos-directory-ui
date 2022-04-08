@@ -71,17 +71,16 @@ function ValidatorsPanel(props) {
                 <CTable>
                   <tbody className="small">
                     <tr>
-                      {type === 'active' && (
-                        <th className="align-middle text-center d-none d-lg-table-cell">#</th>
-                      )}
                       <th colSpan={2}>Validator</th>
                       {!props.limit && (
                         <th className="d-none d-xl-table-cell">Details</th>
                       )}
-                      {type !== 'active' && (
+                      <th className="text-center d-none d-md-table-cell">{props.limit ? 'Comm.' : 'Commission'}</th>
+                      {type === 'active' ? (
+                        <th className="align-middle text-center d-none d-lg-table-cell">Rank</th>
+                      ) : (
                         <th className="text-center d-none d-md-table-cell">Status</th>
                       )}
-                      <th className="text-center d-none d-md-table-cell">{props.limit ? 'Comm.' : 'Commission'}</th>
                       <th>Badges</th>
                       {!props.limit &&
                         <th></th>
@@ -90,31 +89,33 @@ function ValidatorsPanel(props) {
                     {filterValidators(type).map(validator => {
                       return (
                         <tr key={validator.address}>
-                          {type === 'active' && (
-                            <td className="align-middle text-center d-none d-lg-table-cell">
-                              {validator.rank}
-                            </td>
-                          )}
                           <td width={20} className="align-middle">
                             <img src={validator.mintscan_image || validator.keybase_image || 'https://craftypixels.com/placeholder-image/30x30/ffffff/a6a6a6&text=missing'}
                               width={20} height={20} className="m-md-2 rounded-circle shadow overflow-hidden" />
                           </td>
-                          <td className="align-middle text-wrap text-break">
+                          <td className="align-middle text-wrap text-break" style={{maxWidth: 300}}>
                             {validator.moniker || validator.name}
                           </td>
                           {!props.limit && (
-                            <td className="d-none d-xl-table-cell">{validator.description?.details}</td>
-                          )}
-                          {type !== 'active' && (
-                            <td className="align-middle text-center d-none d-md-table-cell" width={60}>
-                              {validator.jailed && 'Jailed'}
+                            <td className="align-middle text-wrap text-break d-none d-xl-table-cell" style={{maxWidth: 500}}>
+                              {validator.description?.details}
                             </td>
                           )}
-                          <td className="align-middle text-center d-none d-md-table-cell" width={60}>
+                          <td className="align-middle text-center d-none d-md-table-cell">
                             {validator.commission?.commission_rates && (
                               <span>{_.round(parseFloat(validator.commission.commission_rates.rate) * 100, 2)}%</span>
                             )}
                           </td>
+                          {type === 'active' 
+                          ? (
+                            <td className="align-middle text-center d-none d-lg-table-cell">
+                              {validator.rank}
+                            </td>
+                          ) : (
+                            <td className="align-middle text-center d-none d-md-table-cell">
+                              {validator.jailed && 'Jailed'}
+                            </td>
+                          )}
                           <td className="align-middle px-0">
                             <ValidatorBadges validator={validator} chain={chain} />
                           </td>
