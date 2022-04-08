@@ -50,7 +50,7 @@ function ValidatorBadges(props) {
   }
 
   return (
-    <div className="text-start">
+    <div className="d-flex justify-content-center flex-wrap">
       {renderBadge(cilHeart, "Validator commission is greater than 0", commissionPercent() > 0.0)}
       {renderBadge(cilGrain, "Validator is not in the top 10", validator.rank > 10)}
       {renderBadge(cilScreenDesktop, "Validator has a website", website(), website())}

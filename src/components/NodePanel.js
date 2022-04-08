@@ -60,19 +60,19 @@ function NodePanel(props) {
                   </tr>
                   <tr>
                     <td>Height</td>
-                    <td className={apiStatus.blockHeight < chain.height - 10 ? 'text-danger' : ''}>{apiStatus.blockHeight}</td>
+                    <td className={apiStatus.blockHeight < chain.height - 10 ? 'text-danger' : ''}>{apiStatus.blockHeight > 0 ? apiStatus.blockHeight : '-'}</td>
                   </tr>
                   <tr>
                     <td>Response time</td>
                     <td>{apiStatus.responseTime || '-'}ms</td>
                   </tr>
                   <tr>
-                    <td>Last error</td>
-                    <td>{apiStatus.lastError}<br /><em><Moment fromNow>{apiStatus.lastErrorAt}</Moment></em></td>
-                  </tr>
-                  <tr>
                     <td>Last check</td>
                     <td><em><Moment fromNow>{apiStatus.lastCheck}</Moment></em></td>
+                  </tr>
+                  <tr>
+                    <td>Last error</td>
+                    <td>{apiStatus.lastError ? <span>{apiStatus.lastError}<br /><em><Moment fromNow>{apiStatus.lastErrorAt}</Moment></em></span> : '-'}</td>
                   </tr>
                 </tbody>
               </CTable>

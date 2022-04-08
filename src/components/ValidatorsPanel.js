@@ -48,6 +48,10 @@ function ValidatorsPanel(props) {
 
   return (
     <Panel title="Validators">
+      {validators.length < 1 
+      ? (
+        <p><em>Failed to load validators. Please try again later.</em></p>
+      ) : (
       <>
         <CNav variant="tabs" role="tablist">
           {types.map(type => {
@@ -134,7 +138,9 @@ function ValidatorsPanel(props) {
           )}
         </div>
       </>
-    </Panel>
+      )
+}
+    </Panel >
   )
 }
 
