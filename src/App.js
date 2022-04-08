@@ -12,7 +12,6 @@ import ChainList from "./components/ChainList";
 import Chain from "./components/Chain";
 import AppFooter from "./components/AppFooter";
 
-
 import './scss/style.scss'
 
 function App() {
