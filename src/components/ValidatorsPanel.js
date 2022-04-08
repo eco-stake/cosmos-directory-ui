@@ -99,7 +99,7 @@ function ValidatorsPanel(props) {
                             <img src={validator.mintscan_image || validator.keybase_image || 'https://craftypixels.com/placeholder-image/30x30/ffffff/a6a6a6&text=missing'}
                               width={20} height={20} className="m-md-2 rounded-circle shadow overflow-hidden" />
                           </td>
-                          <td className="align-middle">
+                          <td className="align-middle text-wrap text-break">
                             {validator.moniker || validator.name}
                           </td>
                           {!props.limit && (
@@ -115,7 +115,7 @@ function ValidatorsPanel(props) {
                               <span>{_.round(parseFloat(validator.commission.commission_rates.rate) * 100, 2)}%</span>
                             )}
                           </td>
-                          <td className="align-middle" width={180}>
+                          <td className="align-middle px-0">
                             <ValidatorBadges validator={validator} chain={chain} />
                           </td>
                           {!props.limit &&

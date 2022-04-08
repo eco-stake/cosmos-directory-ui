@@ -5,7 +5,8 @@ import {
   CNavLink,
   CTabContent,
   CTabPane,
-  CTable
+  CTable,
+  CTooltip
 } from '@coreui/react'
 import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
@@ -50,7 +51,9 @@ function NodePanel(props) {
               {apiStatus.available ? (
                 <span className="d-xs-inline d-md-none text-success small">{apiStatus.responseTime || '-'}ms</span>
               ) : (
-                <span className="d-xs-inline d-md-none text-danger small">N/A</span>
+                <CTooltip content={<span>{apiStatus.lastError}<br /><em><Moment fromNow>{apiStatus.lastErrorAt}</Moment></em></span>}>
+                  <span className="d-xs-inline d-md-none text-danger small">Error</span>
+                </CTooltip>
               )}
               <CTable small className="d-none d-md-table">
                 <tbody className="small">
@@ -70,10 +73,12 @@ function NodePanel(props) {
                     <td>Last check</td>
                     <td><em><Moment fromNow>{apiStatus.lastCheck}</Moment></em></td>
                   </tr>
-                  <tr>
-                    <td>Last error</td>
-                    <td>{apiStatus.lastError ? <span>{apiStatus.lastError}<br /><em><Moment fromNow>{apiStatus.lastErrorAt}</Moment></em></span> : '-'}</td>
-                  </tr>
+                  {apiStatus.lastError && (
+                    <tr>
+                      <td>Last error</td>
+                      <td><span>{apiStatus.lastError}<br /><em><Moment fromNow>{apiStatus.lastErrorAt}</Moment></em></span></td>
+                    </tr>
+                  )}
                 </tbody>
               </CTable>
             </>
