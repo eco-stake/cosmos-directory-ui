@@ -55,7 +55,7 @@ function ValidatorBadges(props) {
       {renderBadge(cilGrain, "Validator is not in the top 10", validator.rank > 10)}
       {renderBadge(cilScreenDesktop, "Validator has a website", website(), website())}
       {renderBadge(cilLifeRing, "Validator has a security contact", validator.description?.security_contact, `mailto:${validator.description?.security_contact}`)}
-      {renderBadge(cilLoopCircular, "Validator offers REStake", validator.restake?.address, `https://restake.app/${chain.path}`)}
+      {renderBadge(cilLoopCircular, "Validator offers REStake", validator.restake?.address, `https://restake.app/${chain.path}/${validator.address}`)}
     </div>
   )
 }
