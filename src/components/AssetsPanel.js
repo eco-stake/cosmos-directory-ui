@@ -81,7 +81,7 @@ function AssetsPanel(props) {
       return (
         <a key={type} href={url} target="_blank">{type.toUpperCase()}</a>
       )
-    }).reduce((prev, curr) => [ prev, ' | ', curr ]);
+    }).reduce((prev, curr) => [ prev, ' | ', curr ], []);
 
     return {
       name: asset.name,
