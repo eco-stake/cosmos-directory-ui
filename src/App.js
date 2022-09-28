@@ -102,7 +102,7 @@ function App() {
   }
 
   function chainsByPath() {
-    if (!chains) return {}
+    if (!chains?.chains) return {}
 
     return chains.chains.reduce((a, v) => ({ ...a, [v.path]: v }), {})
   }

@@ -43,6 +43,12 @@ function OverviewPanel(props) {
         value: status.available ? <span className="text-success p-0">Available</span> : <span className="text-danger p-0">Unavailable</span>
       },
     ])
+    if(chain.website){
+      data.push({
+        key: 'Website',
+        value: <a href={chain.website} target="_blank">{chain.website}</a>
+      })
+    }
     if(chain.explorers){
       data.push({
         key: 'Explorers',

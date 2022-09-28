@@ -42,7 +42,7 @@ const AppHeader = (props) => {
         command() { navigate('/') }
       }
     ]
-    if(!chains) return data
+    if(!chains?.chains) return data
 
     return chains.chains.reduce((sum, chain) => {
       data.push({

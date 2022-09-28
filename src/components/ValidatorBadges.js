@@ -26,7 +26,7 @@ function ValidatorBadges(props) {
   }
 
   function commissionPercent() {
-    return validator.commission && validator.commission.commission_rates.rate
+    return validator.commission?.commission_rates?.rate
   }
 
   function renderBadge(icon, tooltip, check, link) {

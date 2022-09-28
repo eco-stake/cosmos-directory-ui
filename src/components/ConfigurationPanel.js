@@ -54,21 +54,30 @@ function ConfigurationPanel(props) {
     value: chain.codebase.compatible_versions.join(', ')
   })
 
-  if(chain.daemon_name) data.push({
+  const daemon_name = chain.codebase?.daemon_name || chain.daemon_name
+  if(daemon_name) data.push({
     key: 'Daemon Name',
-    value: chain.daemon_name
+    value: daemon_name
   })
 
-  if(chain.node_home) data.push({
+  const node_home = chain.codebase?.node_home || chain.node_home
+  if(node_home) data.push({
     key: 'Node Home',
-    value: chain.node_home
+    value: node_home
   })
 
-  if(chain.genesis?.genesis_url){
-    const url = chain.genesis?.genesis_url
+  const genesis_url = chain.codebase?.genesis?.genesis_url || chain.genesis?.genesis_url
+  if(genesis_url){
     data.push({
       key: 'Genesis URL',
-      value: <a href={url} target="_blank">{url}</a>
+      value: <a href={genesis_url} target="_blank">{genesis_url}</a>
+    })
+  }
+
+  if (chain.website) {
+    data.push({
+      key: 'Website',
+      value: <a href={chain.website} target="_blank">{chain.website}</a>
     })
   }
 
