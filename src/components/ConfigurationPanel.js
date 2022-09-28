@@ -73,6 +73,11 @@ function ConfigurationPanel(props) {
       value: <a href={genesis_url} target="_blank">{genesis_url}</a>
     })
   }
+
+  if (chain.website) {
+    data.push({
+      key: 'Website',
+      value: <a href={chain.website} target="_blank">{chain.website}</a>
     })
   }
 
