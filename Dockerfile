@@ -1,7 +1,9 @@
 # dev env
-FROM node:17-alpine
+FROM node:17-slim
 
-RUN apk add --update python3 make g++ && rm -rf /var/cache/apk/*
+RUN apt-get update && apt-get install -y python3 make g++ musl-dev
+
+RUN ln -s /usr/lib/aarch64-linux-musl/libc.so /lib/libc.musl-aarch64.so.1
 
 ENV NODE_ENV=development
 
