@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { 
+import {
   CNav,
   CNavItem,
   CNavLink,
@@ -136,7 +136,7 @@ function NodePanel(props) {
               <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === type} key={type}>
                 {['rpc', 'rest'].includes(type) &&
                   <p className="alert alert-secondary small mt-2">
-                    <strong>{type.toUpperCase()} Proxy:</strong> <a href={`https://${type}.cosmos.directory/${chain.path}`} target="_blank">{`https://${type}.cosmos.directory/${chain.path}`}</a>
+                    <strong>{type.toUpperCase()} Proxy:</strong> <a href={`https://${type}.${process.env.DIRECTORY_DOMAIN}/${chain.path}`} target="_blank">{`https://${type}.${process.env.DIRECTORY_DOMAIN}/${chain.path}`}</a>
                   </p>
                 }
                 <DataTable bodyClass="small" columnclass="align-middle" labelclass="text-break w-25" valueclass="w-50" data={props.limit ? _.take(panelData[type], props.limit) : panelData[type]} header={['Provider', 'Status']} />

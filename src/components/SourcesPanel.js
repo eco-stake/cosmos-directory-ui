@@ -1,5 +1,5 @@
 import React from "react";
-import { 
+import {
   CTooltip
 } from '@coreui/react'
 import Panel from "./Panel";
@@ -13,9 +13,9 @@ function SourcesPanel(props) {
       label: <a href="https://github.com/cosmos/chain-registry" target="_blank" className="text-reset">Chain Registry</a>,
       value: (
         <>
-          <a href={`https://chains.cosmos.directory/${chain.path}`} target="_blank">chains.cosmos.directory/{chain.path}</a><br />
-          <a href={`https://chains.cosmos.directory/${chain.path}/chain`} target="_blank">chains.cosmos.directory/{chain.path}/chain</a><br />
-          <a href={`https://chains.cosmos.directory/${chain.path}/assetlist`} target="_blank">chains.cosmos.directory/{chain.path}/assetlist</a><br />
+          <a href={`https://chains.${process.env.DIRECTORY_DOMAIN}/${chain.path}`} target="_blank">chains.{process.env.DIRECTORY_DOMAIN}/{chain.path}</a><br />
+          <a href={`https://chains.${process.env.DIRECTORY_DOMAIN}/${chain.path}/chain`} target="_blank">chains.{process.env.DIRECTORY_DOMAIN}/{chain.path}/chain</a><br />
+          <a href={`https://chains.${process.env.DIRECTORY_DOMAIN}/${chain.path}/assetlist`} target="_blank">chains.{process.env.DIRECTORY_DOMAIN}/{chain.path}/assetlist</a><br />
         </>
       )
     },
@@ -24,7 +24,7 @@ function SourcesPanel(props) {
       label: <a href="https://github.com/eco-stake/validator-registry" target="_blank" className="text-reset">Validator Registry</a>,
       value: (
         <>
-          <a href={`https://validators.cosmos.directory/chains/${chain.path}`} target="_blank">validators.cosmos.directory/chains/{chain.path}</a><br />
+          <a href={`https://validators.${process.env.DIRECTORY_DOMAIN}/chains/${chain.path}`} target="_blank">validators.{process.env.DIRECTORY_DOMAIN}/chains/{chain.path}</a><br />
         </>
       )
     },
@@ -35,8 +35,8 @@ function SourcesPanel(props) {
       ),
       value: (
         <>
-          <a href={`https://rpc.cosmos.directory/${chain.path}`} target="_blank">rpc.cosmos.directory/{chain.path}</a><br />
-          <a href={`https://rest.cosmos.directory/${chain.path}`} target="_blank">rest.cosmos.directory/{chain.path}</a><br />
+          <a href={`https://rpc.${process.env.DIRECTORY_DOMAIN}/${chain.path}`} target="_blank">rpc.{process.env.DIRECTORY_DOMAIN}/{chain.path}</a><br />
+          <a href={`https://rest.${process.env.DIRECTORY_DOMAIN}/${chain.path}`} target="_blank">rest.{process.env.DIRECTORY_DOMAIN}/{chain.path}</a><br />
         </>
       )
     },
@@ -47,7 +47,7 @@ function SourcesPanel(props) {
       ),
       value: (
         <>
-          <a href={`https://status.cosmos.directory/${chain.path}`} target="_blank">status.cosmos.directory/{chain.path}</a><br />
+          <a href={`https://status.${process.env.DIRECTORY_DOMAIN}/${chain.path}`} target="_blank">status.{process.env.DIRECTORY_DOMAIN}/{chain.path}</a><br />
         </>
       )
     },
